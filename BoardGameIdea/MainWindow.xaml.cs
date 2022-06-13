@@ -27,68 +27,63 @@ public partial class MainWindow : Window
         InitializeComponent();
         Statics.InitializeGame();
         SetupMainGame();
-        SetupPatterns();
     }
 
     public void SetupMainGame()
     {
-        Grid? grid = FindName("MainGame") as Grid;
-        if(grid != null)
+        Grid grid = FindName("MainGame") as Grid;
+        int heightBoard = Statics.Game.Board.GetUpperBound(0) + 1;
+        double cellSize = Statics.GRID_HEIGHT / heightBoard;
+        grid.Height = Statics.GRID_HEIGHT;
+        for (int i = 0; i < Statics.GRID_WIDTH; i++)
         {
-            int heightBoard = Statics.Game.Board.GetUpperBound(0) + 1;
-            double cellSize = Statics.GRID_HEIGHT / heightBoard;
-            grid.Height = Statics.GRID_HEIGHT;
-            for (int i = 0; i < Statics.GRID_WIDTH; i++)
+            RowDefinition rowDef = new RowDefinition();
+            rowDef.Height = new GridLength(cellSize);
+            ColumnDefinition rowCol = new ColumnDefinition();
+            rowCol.Width = new GridLength(cellSize);
+            grid.RowDefinitions.Add(rowDef);
+            grid.ColumnDefinitions.Add(rowCol);
+        }
+        for (int i = 0; i < heightBoard; i++)
+        {
+            for (int j = 0; j < heightBoard; j++)
             {
-                RowDefinition rowDef = new RowDefinition();
-                rowDef.Height = new GridLength(cellSize);
-                ColumnDefinition rowCol = new ColumnDefinition();
-                rowCol.Width = new GridLength(cellSize);
-                grid.RowDefinitions.Add(rowDef);
-                grid.ColumnDefinitions.Add(rowCol);
-            }
-            for(int i = 0; i < heightBoard; i++)
-            {
-                for(int j = 0; j < heightBoard; j++)
-                {
-                    Ellipse ellipse = new Ellipse();
-                    ellipse.Fill = new SolidColorBrush(Colors.Transparent);
-                    ellipse.Stroke = new SolidColorBrush(Colors.Ivory);
-                    string ellipseName = $"Cell{i * Statics.GRID_WIDTH + j}";
-                    ellipse.Name = ellipseName;
-                    RegisterName(ellipseName, ellipse);
-                    ellipse.MouseUp += CellClick;
-                    Grid.SetRow(ellipse, i);
-                    Grid.SetColumn(ellipse, j);
-                    grid.Children.Add(ellipse);
-                }
+                Ellipse ellipse = new Ellipse();
+                ellipse.Fill = new SolidColorBrush(Colors.Transparent);
+                ellipse.Stroke = new SolidColorBrush(Colors.Ivory);
+                string ellipseName = $"Cell{i * Statics.GRID_WIDTH + j}";
+                ellipse.Name = ellipseName;
+                RegisterName(ellipseName, ellipse);
+                ellipse.MouseUp += CellClick;
+                Grid.SetRow(ellipse, i);
+                Grid.SetColumn(ellipse, j);
+                grid.Children.Add(ellipse);
             }
         }
+
     }
     public void SetupPatterns()
     {
-        for(int i = 0; i < Statics.PATTERNS.Length; i++)
+        for (int i = 0; i < Statics.PATTERNS.Length; i++)
         {
             Pattern currentPattern = Statics.PATTERNS[i];
             int height = currentPattern.PatternShape.GetUpperBound(0);
             int width = currentPattern.PatternShape.GetUpperBound(1);
-            for(int j = 0; j <= height; j++)
+            for (int j = 0; j <= height; j++)
             {
-                for(int k = 0; k <= width; k++)
+                for (int k = 0; k <= width; k++)
                 {
                     if (currentPattern.PatternShape[j, k])
                     {
-                        int curNumber = j * Statics.PATTERN_WIDTH + k;
-                        Ellipse? ellipse = FindName($"p{i}{curNumber}") as Ellipse;
-                        if(ellipse != null)
-                        {
-                            ellipse.Fill = new SolidColorBrush(Colors.Black);
-                        }
-                        TextBlock? text = FindName($"s{i}") as TextBlock;
-                        if (text != null)
-                        {
-                            text.Text = currentPattern.Score.ToString();
-                        }
+                        int curNumber = j * Statics.PATTERN_SIZE + k;
+                        Ellipse ellipse = FindName($"p{i}{curNumber}") as Ellipse;
+
+                        ellipse.Fill = new SolidColorBrush(Colors.Black);
+
+                        TextBlock text = FindName($"s{i}") as TextBlock;
+
+                        text.Text = currentPattern.Score.ToString();
+
                     }
                 }
             }
@@ -99,29 +94,27 @@ public partial class MainWindow : Window
         TileType[,] board = Statics.Game.Board;
         int height = board.GetUpperBound(0) + 1;
         int width = board.GetUpperBound(1) + 1;
-        for(int i = 0; i < height; i++)
+        for (int i = 0; i < height; i++)
         {
-            for(int j = 0; j < width; j++)
+            for (int j = 0; j < width; j++)
             {
                 int curCell = i * height + j;
                 string cellName = $"Cell{curCell}";
-                Ellipse? ellipse = FindName(cellName) as Ellipse;
-                if(ellipse != null)
-                {
-                    ellipse.Fill = board[i, j].GetBrushFromPlayer();
-                }
+                Ellipse ellipse = FindName(cellName) as Ellipse;
+
+                ellipse.Fill = board[i, j].GetBrushFromPlayer();
+
             }
         }
-        TextBox? text = FindName($"ScoreGame") as TextBox;
-        if (text != null)
-        {
-            text.Text = $"White : {Statics.Game.WhiteScore} / Black : {Statics.Game.BlackScore}";
-        }
+        TextBox text = FindName($"ScoreGame") as TextBox;
+
+        text.Text = $"White : {Statics.Game.WhiteScore} / Black : {Statics.Game.BlackScore}";
+
     }
 
     private void CellClick(object sender, RoutedEventArgs e)
     {
-        if(!Statics.Game.IsGameOver())
+        if (!Statics.Game.IsGameOver())
         {
             Ellipse ellipse = (Ellipse)sender;
             int curCell = int.Parse(ellipse.Name.Split("Cell")[1]);
@@ -129,12 +122,18 @@ public partial class MainWindow : Window
             int y = curCell % Statics.GRID_WIDTH;
             Statics.Game.Play(x, y);
             RefreshGame();
-        }        
+        }
     }
 
     private void Reset(object sender, RoutedEventArgs e)
     {
         Statics.InitializeGame();
         RefreshGame();
+    }
+
+    private void ShowPatterns(object sender, RoutedEventArgs e)
+    {
+        PatternWindow window = new PatternWindow(Statics.PATTERNS);
+        window.Show();
     }
 }
