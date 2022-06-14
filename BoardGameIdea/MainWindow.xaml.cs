@@ -38,9 +38,9 @@ public partial class MainWindow : Window
         for (int i = 0; i < Statics.GRID_WIDTH; i++)
         {
             RowDefinition rowDef = new RowDefinition();
-            rowDef.Height = new GridLength(cellSize);
+            rowDef.Height = new GridLength(1, GridUnitType.Star);
             ColumnDefinition rowCol = new ColumnDefinition();
-            rowCol.Width = new GridLength(cellSize);
+            rowCol.Width = new GridLength(1, GridUnitType.Star);
             grid.RowDefinitions.Add(rowDef);
             grid.ColumnDefinitions.Add(rowCol);
         }

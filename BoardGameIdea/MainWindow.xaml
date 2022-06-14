@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BoardGameIdea"
         mc:Ignorable="d"
-        Title="Board game idea" Height="900" Width="700" Background="#FFAAAAAA">
+        Title="Board game idea" Height="900" Width="720" Background="#FFAAAAAA">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="700" />
