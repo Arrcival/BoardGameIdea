@@ -1,14 +1,15 @@
 ﻿using BoardGameIdea.Entities;
+using BoardGameIdea.Entities.Bis;
 
 namespace BoardGameIdea.Tests.PerformanceTest;
 
-public class GridSevenTest
+public class GridSevenBisTest
 {
-    Game currentGame;
+    GameBis currentGame;
     [SetUp]
     public void Setup()
     {
-        currentGame = new Game(7, 21, false);
+        currentGame = new GameBis(7, 21, false);
         Pattern[] patterns = new Pattern[5]{
             new("10,01", 1, 2),
             new("100,000,001", 2, 2),
@@ -26,7 +27,7 @@ public class GridSevenTest
         Assert.That(currentGame.WhiteScore, Is.EqualTo(12));
     }
     [Test, MaxTime(600)]
-    public void TestPerformanceFurther()
+    public void TestPerformanceFurtherOne()
     {
         currentGame.SetupFromString("wbwbwbw,bwbwbwb,wbwbwbw,.......,wbwbwbw,.......,.......");
         Assert.That(currentGame.WhiteScore, Is.EqualTo(14));
