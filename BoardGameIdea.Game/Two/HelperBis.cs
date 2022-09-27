@@ -1,4 +1,4 @@
-﻿namespace BoardGameIdea.Entities.Bis;
+﻿namespace BoardGameIdea.Entities.Two;
 
 public static class HelperBis
 {

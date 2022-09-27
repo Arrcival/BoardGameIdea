@@ -4,11 +4,11 @@ namespace BoardGameIdea.Tests.PerformanceTest;
 
 public class GridSevenTest
 {
-    Game currentGame;
+    GameOne currentGame;
     [SetUp]
     public void Setup()
     {
-        currentGame = new Game(7, 21, false);
+        currentGame = new GameOne(7, 21, false);
         Pattern[] patterns = new Pattern[5]{
             new("10,01", 1, 2),
             new("100,000,001", 2, 2),

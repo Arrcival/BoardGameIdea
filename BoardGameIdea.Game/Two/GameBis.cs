@@ -1,7 +1,6 @@
-﻿using System.Linq;
-using static BoardGameIdea.Entities.Helper;
+﻿using static BoardGameIdea.Entities.Helper;
 
-namespace BoardGameIdea.Entities.Bis;
+namespace BoardGameIdea.Entities.Two;
 
 public class GameBis
 {
@@ -76,6 +75,20 @@ public class GameBis
                 if (count >= str.Length) return;
             }
         }
+    }
+
+    public TileType[,] GetBoard()
+    {
+        TileType[,] board = new TileType[width, width];
+        foreach(var whiteMoves in whitePlayerHits)
+        {
+            board[whiteMoves.Item1, whiteMoves.Item2] = TileType.WHITE;
+        }
+        foreach (var blackMoves in blackPlayerHits)
+        {
+            board[blackMoves.Item1, blackMoves.Item2] = TileType.BLACK;
+        }
+        return board;
     }
 
     #endregion

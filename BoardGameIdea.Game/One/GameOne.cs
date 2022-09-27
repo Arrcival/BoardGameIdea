@@ -1,9 +1,10 @@
-﻿using System.Linq;
+﻿using BoardGameIdea.Entities.Interfaces;
 using static BoardGameIdea.Entities.Helper;
+using static BoardGameIdea.Entities.One.HelperOne;
 
-namespace BoardGameIdea.Entities;
+namespace BoardGameIdea.Entities.One;
 
-public class Game
+public class GameOne : IGame
 {
     public TileType[,] Board;
     int playerHits;
@@ -13,11 +14,8 @@ public class Game
     int patternsMinimumCount;
     int width;
 
-    public int WhiteScore { get { return GetScore(TileType.WHITE); } }
-    public int BlackScore { get { return GetScore(TileType.BLACK); } }
-
-    public Game(int width) : this(width, width * width - width) { }
-    public Game(int width, int playerHits, bool overlapPatterns = false)
+    public GameOne(int width) : this(width, width * width - width) { }
+    public GameOne(int width, int playerHits, bool overlapPatterns = false)
     {
         Board = new TileType[width, width];
         this.playerHits = playerHits;
@@ -51,7 +49,7 @@ public class Game
 
 
     #region Scoring & Patterns
-    int GetScore(TileType tileType)
+    public int GetScore(TileType tileType)
     {
         if (!patternOverlapScore)
             return GetBoardPoints(Board, patterns, tileType, patternsMinimumCount);
@@ -78,6 +76,11 @@ public class Game
                 if (count >= str.Length) return;
             }
         }            
+    }
+
+    public TileType[,] GetBoard()
+    {
+        return Board;
     }
 
     #endregion

@@ -32,7 +32,7 @@ public partial class MainWindow : Window
     public void SetupMainGame()
     {
         Grid grid = FindName("MainGame") as Grid;
-        int heightBoard = Statics.Game.Board.GetUpperBound(0) + 1;
+        int heightBoard = Statics.Game.GetBoard().GetUpperBound(0) + 1;
         double cellSize = Statics.GRID_HEIGHT / heightBoard;
         grid.Height = Statics.GRID_HEIGHT;
         for (int i = 0; i < Statics.GRID_WIDTH; i++)
@@ -91,7 +91,7 @@ public partial class MainWindow : Window
     }
     public void RefreshGame()
     {
-        TileType[,] board = Statics.Game.Board;
+        TileType[,] board = Statics.Game.GetBoard();
         int height = board.GetUpperBound(0) + 1;
         int width = board.GetUpperBound(1) + 1;
         for (int i = 0; i < height; i++)

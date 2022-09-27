@@ -4,11 +4,11 @@ namespace BoardGameIdea.Tests.GameTest;
 
 public class BasicTest
 {
-    Game currentGame;
+    GameOne currentGame;
     [SetUp]
     public void Setup()
     {
-        currentGame = new Game(3, 3, false);
+        currentGame = new GameOne(3, 3, false);
         Pattern pattern1 = new("11", 1, 2);
         Pattern pattern2 = new("100,000,001", 7, 2);
         Pattern pattern3 = new("11,01", 5, 4);

@@ -1,6 +1,6 @@
 using BoardGameIdea.Entities;
-using static BoardGameIdea.Entities.Helper;
-using static BoardGameIdea.Entities.Helper.TileType;
+using static BoardGameIdea.Entities.HelperOne;
+using static BoardGameIdea.Entities.HelperOne.TileType;
 
 namespace BoardGameIdea.Tests.HelperTest;
 
