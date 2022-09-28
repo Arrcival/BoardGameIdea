@@ -1,4 +1,6 @@
 ﻿using BoardGameIdea.Entities;
+using BoardGameIdea.Entities.Interfaces;
+using BoardGameIdea.Entities.One;
 using System.Windows.Media;
 using static BoardGameIdea.Entities.Helper;
 
@@ -14,7 +16,7 @@ public static class Statics
     const int PLAYER_HITS = GRID_WIDTH * GRID_WIDTH - GRID_WIDTH;
     const bool PATTERNS_OVERLAP = true;
     
-    public static Pattern[] PATTERNS = new Pattern[12]{
+    public static Entities.Pattern[] PATTERNS = new Entities.Pattern[12]{
         new("101,000,101", 2, 1), // The square 
         new("1001,0000,0000,1001", 2, 1), // The big square 
         new("10001,00000,00000,00000,10001", 2, 1), // The really big square 
@@ -29,11 +31,11 @@ public static class Statics
         new("011000,100000,000000,000000,000001,000110", 4, 2) // The mirror
     };
 
-    public static Game Game;
+    public static IGame Game;
 
     public static void InitializeGame()
     {
-        Game = new Game(GRID_WIDTH, PLAYER_HITS, PATTERNS_OVERLAP);
+        Game = new GameOne(GRID_WIDTH, PLAYER_HITS, PATTERNS_OVERLAP);
         Game.SetupPatterns(PATTERNS);
     }
 

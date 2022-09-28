@@ -1,14 +1,8 @@
-﻿
-using BoardGameIdea.Entities;
+﻿using BoardGameIdea.Entities;
 using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace BoardGameIdea;
@@ -68,7 +62,9 @@ public partial class PatternWindow : Window
         #region Circles grid
         Grid gridPattern = new Grid();
         gridPattern.HorizontalAlignment = HorizontalAlignment.Center;
-        (int, int)[] trueValues = pattern.PatternTrueShapes[0];
+        bool[,] trueValues = pattern.ToBoolArray();
+        int height = trueValues.GetUpperBound(0);
+        int width = trueValues.GetUpperBound(1);
         for(int i = 0; i < Statics.PATTERN_SIZE; i++)
         {
             rowDef = new RowDefinition();
@@ -81,7 +77,7 @@ public partial class PatternWindow : Window
             {
                 Ellipse ellipse = new Ellipse();
                 ellipse.Stroke = new SolidColorBrush(Colors.Ivory);
-                if(trueValues.Contains((i, j)))
+                if (i <= height && j <= width && trueValues[i, j])
                     ellipse.Fill = new SolidColorBrush(Colors.Black);
                 else
                     ellipse.Fill = new SolidColorBrush(Colors.Transparent);

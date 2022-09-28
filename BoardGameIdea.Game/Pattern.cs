@@ -1,25 +1,27 @@
-﻿namespace BoardGameIdea.Entities;
+﻿
+
+namespace BoardGameIdea.Entities;
 
 public class Pattern
 {
-    int rotations;
-    public bool[,] PatternShape;
-    public int Score;
-    public int TilesAmount;
-    public bool[][,] PatternShapes { get; set; }
-    public (int, int)[][] PatternTrueShapes { get; set; }
-
+    public string PatternString { get; set; }
+    public int Score { get; set; }
+    public int Rotations { get; set; }
     public Pattern(string patternString, int score, int rotationsAmount = 1)
     {
-        TilesAmount = 0;
-        rotations = rotationsAmount;
+        PatternString = patternString;
         Score = score;
-        int width = patternString.Split(",")[0].Length;
-        int height = patternString.Count(c => c == ',') + 1;
-        PatternShape = new bool[height, width];
+        Rotations = rotationsAmount;
+    }
+
+    public bool[,] ToBoolArray()
+    {
+        int width = PatternString.Split(",")[0].Length;
+        int height = PatternString.Count(c => c == ',') + 1;
+        bool[,] patternShape = new bool[height, width];
         int curHeight = 0;
         int curWidth = 0;
-        foreach(char c in patternString)
+        foreach (char c in PatternString)
         {
             if (c == ',')
             {
@@ -27,42 +29,12 @@ public class Pattern
                 curWidth = 0;
                 continue;
             }
-            if(c == '1')
+            if (c == '1')
             {
-                PatternShape[curHeight, curWidth] = true;
-                TilesAmount++;
+                patternShape[curHeight, curWidth] = true;
             }
             curWidth++;
         }
-        ComputePattern();
-    }
-
-    void ComputePattern()
-    {
-        if (rotations == 1)
-            PatternShapes = new bool[][,] { PatternShape };
-        else if (rotations == 2)
-            PatternShapes = new bool[][,]
-            {
-                PatternShape,
-                PatternShape.RotateArrayClockwise()
-            };
-        else
-        {
-            PatternShapes = new bool[][,]
-            {
-                PatternShape,
-                PatternShape.RotateArrayClockwise(),
-                PatternShape.RotateArrayClockwise().RotateArrayClockwise(),
-                PatternShape.RotateArrayClockwise().RotateArrayClockwise().RotateArrayClockwise(),
-            };
-        }
-        int amountShapes = PatternShapes.GetUpperBound(0) + 1;
-        PatternTrueShapes = new (int, int)[amountShapes][];
-
-        for (int i = 0; i < amountShapes; i++)
-        {
-            PatternTrueShapes[i] = PatternShapes[i].GetTrueValues(TilesAmount);
-        }
+        return patternShape;
     }
 }

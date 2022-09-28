@@ -1,23 +1,22 @@
-﻿using System.Linq;
+﻿using BoardGameIdea.Entities.Interfaces;
+using System.Linq;
 using static BoardGameIdea.Entities.Helper;
+using static BoardGameIdea.Entities.One.HelperOne;
 
-namespace BoardGameIdea.Entities;
+namespace BoardGameIdea.Entities.One;
 
-public class Game
+public class GameOne : IGame
 {
     public TileType[,] Board;
     int playerHits;
     bool patternOverlapScore;
     TileType currentPlayerMove;
-    Pattern[] patterns;
+    PatternOne[] patterns;
     int patternsMinimumCount;
     int width;
 
-    public int WhiteScore { get { return GetScore(TileType.WHITE); } }
-    public int BlackScore { get { return GetScore(TileType.BLACK); } }
-
-    public Game(int width) : this(width, width * width - width) { }
-    public Game(int width, int playerHits, bool overlapPatterns = false)
+    public GameOne(int width) : this(width, width * width - width) { }
+    public GameOne(int width, int playerHits, bool overlapPatterns = false)
     {
         Board = new TileType[width, width];
         this.playerHits = playerHits;
@@ -28,7 +27,11 @@ public class Game
 
     public void SetupPatterns(params Pattern[] playerPatterns)
     {
-        patterns = playerPatterns;
+        patterns = new PatternOne[playerPatterns.Length];
+        for(int i = 0; i < playerPatterns.Length; i++)
+        {
+            patterns[i] = new PatternOne(playerPatterns[i]);
+        }
         patternsMinimumCount = patterns.Select(p => p.TilesAmount).Min();
     }
 
@@ -51,7 +54,7 @@ public class Game
 
 
     #region Scoring & Patterns
-    int GetScore(TileType tileType)
+    public int GetScore(TileType tileType)
     {
         if (!patternOverlapScore)
             return GetBoardPoints(Board, patterns, tileType, patternsMinimumCount);
@@ -78,6 +81,11 @@ public class Game
                 if (count >= str.Length) return;
             }
         }            
+    }
+
+    public TileType[,] GetBoard()
+    {
+        return Board;
     }
 
     #endregion

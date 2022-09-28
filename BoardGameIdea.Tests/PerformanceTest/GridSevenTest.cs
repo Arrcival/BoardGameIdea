@@ -1,14 +1,19 @@
 ﻿using BoardGameIdea.Entities;
+using BoardGameIdea.Entities.Interfaces;
+using BoardGameIdea.Entities.One;
+using BoardGameIdea.Entities.Two;
 
 namespace BoardGameIdea.Tests.PerformanceTest;
 
 public class GridSevenTest
 {
-    Game currentGame;
+    List<IGame> games;
+    GameOne gameOne;
+    GameTwo gameTwo;
+
     [SetUp]
     public void Setup()
     {
-        currentGame = new Game(7, 21, false);
         Pattern[] patterns = new Pattern[5]{
             new("10,01", 1, 2),
             new("100,000,001", 2, 2),
@@ -16,25 +21,25 @@ public class GridSevenTest
             new("11,11", 2),
             new("1010,0001", 3, 4)
         };
-        currentGame.SetupPatterns(patterns);
+        games = TestHelper.SetupGames(7, 21, false, patterns);
+
+        gameOne = new(7, 21, false);
+        gameTwo = new(7, 21, false);
+        gameOne.SetupPatterns(patterns);
+        gameTwo.SetupPatterns(patterns);
     }
 
-    [Test, MaxTime(300)]
+    [Test, MaxTime(600)]
     public void TestPerformanceOne()
     {
-        currentGame.SetupFromString("wbwbwbw,bwbw...,wbwbwbw,.......,wbwbwbw,.......,.......");
-        Assert.That(currentGame.WhiteScore, Is.EqualTo(12));
+        gameOne.SetupFromString("wbwbwbw,bwbwbwb,wbwbwbw,.......,wbwbwbw,.......,.......");
+        Assert.That(gameOne.GetScore(Helper.TileType.WHITE), Is.EqualTo(14));
     }
+
     [Test, MaxTime(600)]
-    public void TestPerformanceFurther()
+    public void TestPerformanceTwo()
     {
-        currentGame.SetupFromString("wbwbwbw,bwbwbwb,wbwbwbw,.......,wbwbwbw,.......,.......");
-        Assert.That(currentGame.WhiteScore, Is.EqualTo(14));
-    }
-    [Test, MaxTime(1000)]
-    public void TestPerformanceEvenFurtherOne()
-    {
-        currentGame.SetupFromString("wbwbwbw,bwbwbwb,wbwbwbw,bwb....,wbwbwbw,.......,.......");
-        Assert.That(currentGame.WhiteScore, Is.EqualTo(15));
+        gameTwo.SetupFromString("wbwbwbw,bwbwbwb,wbwbwbw,.......,wbwbwbw,.......,.......");
+        Assert.That(gameTwo.GetScore(Helper.TileType.WHITE), Is.EqualTo(14));
     }
 }

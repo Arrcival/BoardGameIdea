@@ -1,10 +1,11 @@
 using BoardGameIdea.Entities;
+using BoardGameIdea.Entities.One;
 using static BoardGameIdea.Entities.Helper;
 using static BoardGameIdea.Entities.Helper.TileType;
 
-namespace BoardGameIdea.Tests.HelperTest;
+namespace BoardGameIdea.Tests.OneTest.HelperTest;
 
-public class PatternMatchTest
+public class PatternOneMatchTest
 {
     [Test]
     public void TestPatternMatchOne()
@@ -18,7 +19,7 @@ public class PatternMatchTest
         {
             { true, true }
         };
-        Assert.IsTrue(CanPatternWork(board, pattern, 0, 1, BLACK));
+        Assert.IsTrue(HelperOne.CanPatternWork(board, pattern, 0, 1, BLACK));
     }
 
     [Test]
@@ -34,7 +35,7 @@ public class PatternMatchTest
             { true, false },
             { false, true },
         };
-        Assert.IsTrue(CanPatternWork(board, pattern, 0, 1, BLACK));
+        Assert.IsTrue(HelperOne.CanPatternWork(board, pattern, 0, 1, BLACK));
     }
     [Test]
     public void TestPatternMatchBig()
@@ -54,6 +55,6 @@ public class PatternMatchTest
             { false, false},
             { true, false},
         };
-        Assert.IsTrue(CanPatternWork(board, pattern, 0, 1, WHITE));
+        Assert.IsTrue(HelperOne.CanPatternWork(board, pattern, 0, 1, WHITE));
     }
 }

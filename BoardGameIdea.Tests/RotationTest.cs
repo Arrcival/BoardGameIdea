@@ -1,6 +1,6 @@
 using BoardGameIdea.Entities;
 
-namespace BoardGameIdea.Tests.HelperTest;
+namespace BoardGameIdea.Tests;
 
 public class RotationTest
 {
