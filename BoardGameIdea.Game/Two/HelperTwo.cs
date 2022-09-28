@@ -1,4 +1,5 @@
 ﻿using BoardGameIdea.Entities.One;
+using static BoardGameIdea.Entities.Helper;
 
 namespace BoardGameIdea.Entities.Two;
 
@@ -32,6 +33,34 @@ public static class HelperTwo
         }
 
         return newPlayerHits;
+    }
+
+    public static int GetBoardPointsOverlap(List<(int, int)> playerHits, PatternTwo[] patterns, int gameWidth, int minimumTiles = 1)
+    {
+        if (playerHits.Count < minimumTiles) return 0;
+
+        int finalScore = 0;
+        for (int x = 0; x < gameWidth; x++)
+        {
+            for (int y = 0; y < gameWidth; y++)
+            {
+                for (int i = 0; i < patterns.Length; i++)
+                {
+                    PatternTwo currentPattern = patterns[i];
+                    (int, int)[][] patternsTrueShapes = currentPattern.PatternTrueShapes;
+                    int patternsCount = patternsTrueShapes.GetUpperBound(0);
+                    for (int j = 0; j <= patternsCount; j++)
+                    {
+                        if (playerHits.Count >= currentPattern.TilesAmount && CanPatternWork(playerHits, patternsTrueShapes[j], x, y))
+                        {
+                            finalScore += currentPattern.Score;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return finalScore;
     }
 
     public static int GetBoardPoints(List<(int, int)> playerHits, PatternTwo[] patterns, int gameWidth, int minimumTiles = 1)

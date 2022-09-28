@@ -8,6 +8,7 @@ public interface IGame
     public int BlackScore { get { return GetScore(TileType.BLACK); } }
 
     void SetupPatterns(params Pattern[] playerPatterns);
+    void SetupFromString(string gameInString);
     void Play(int x, int y);
     bool IsGameOver();
     int GetScore(TileType tileType);

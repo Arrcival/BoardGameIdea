@@ -1,9 +1,10 @@
-﻿using BoardGameIdea.Entities.One;
+﻿using BoardGameIdea.Entities.Interfaces;
+using BoardGameIdea.Entities.One;
 using static BoardGameIdea.Entities.Helper;
 
 namespace BoardGameIdea.Entities.Two;
 
-public class GameTwo
+public class GameTwo : IGame
 {
     List<(int, int)> whitePlayerHits;
     List<(int, int)> blackPlayerHits;
@@ -14,9 +15,6 @@ public class GameTwo
     PatternTwo[] patterns;
     int patternsMinimumCount;
     int width;
-
-    public int WhiteScore { get { return GetScore(whitePlayerHits); } }
-    public int BlackScore { get { return GetScore(blackPlayerHits); } }
 
     public GameTwo(int width) : this(width, width * width - width) { }
     public GameTwo(int width, int playerHits, bool overlapPatterns = false)
@@ -63,6 +61,10 @@ public class GameTwo
     {
          return HelperTwo.GetBoardPoints(playerHits, patterns, width, patternsMinimumCount);
     }
+    int GetScoreOverlap(List<(int, int)> playerHits)
+    {
+        return HelperTwo.GetBoardPointsOverlap(playerHits, patterns, width, patternsMinimumCount);
+    }
 
     public void SetupFromString(string str)
     {
@@ -94,6 +96,20 @@ public class GameTwo
             board[blackMoves.Item1, blackMoves.Item2] = TileType.BLACK;
         }
         return board;
+    }
+
+    public int GetScore(TileType tileType)
+    {
+        if(patternOverlapScore)
+        {
+            if (tileType == TileType.BLACK)
+                return GetScoreOverlap(blackPlayerHits);
+            return GetScoreOverlap(whitePlayerHits);
+        }
+        if (tileType == TileType.BLACK)
+            return GetScore(blackPlayerHits);
+        return GetScore(whitePlayerHits);
+
     }
 
     #endregion
