@@ -11,6 +11,5 @@ public interface IGame
     void Play(int x, int y);
     bool IsGameOver();
     int GetScore(TileType tileType);
-
     TileType[,] GetBoard();
 }

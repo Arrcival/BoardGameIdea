@@ -1,6 +1,8 @@
-﻿namespace BoardGameIdea.Entities.Two;
+﻿using BoardGameIdea.Entities.One;
 
-public static class HelperBis
+namespace BoardGameIdea.Entities.Two;
+
+public static class HelperTwo
 {
     public static bool CanPatternWork(List<(int, int)> playerHits, (int, int)[] pattern, int x, int y)
     {
@@ -32,7 +34,7 @@ public static class HelperBis
         return newPlayerHits;
     }
 
-    public static int GetBoardPoints(List<(int, int)> playerHits, Pattern[] patterns, int gameWidth, int minimumTiles = 1)
+    public static int GetBoardPoints(List<(int, int)> playerHits, PatternTwo[] patterns, int gameWidth, int minimumTiles = 1)
     {
         if (playerHits.Count < minimumTiles) return 0;
 
@@ -43,7 +45,7 @@ public static class HelperBis
             {
                 for (int i = 0; i < patterns.Length; i++)
                 {
-                    Pattern currentPattern = patterns[i];
+                    PatternTwo currentPattern = patterns[i];
                     (int, int)[][] patternsTrueShapes = currentPattern.PatternTrueShapes;
                     int patternsCount = patternsTrueShapes.GetUpperBound(0);
                     for (int j = 0; j <= patternsCount; j++)

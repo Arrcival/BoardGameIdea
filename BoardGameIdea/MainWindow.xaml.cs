@@ -1,17 +1,7 @@
-﻿using BoardGameIdea.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BoardGameIdea.Entities.One;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static BoardGameIdea.Entities.Helper;
 
@@ -66,14 +56,14 @@ public partial class MainWindow : Window
     {
         for (int i = 0; i < Statics.PATTERNS.Length; i++)
         {
-            Pattern currentPattern = Statics.PATTERNS[i];
-            int height = currentPattern.PatternShape.GetUpperBound(0);
-            int width = currentPattern.PatternShape.GetUpperBound(1);
+            bool[,] currentPattern = Statics.PATTERNS[i].ToBoolArray();
+            int height = currentPattern.GetUpperBound(0);
+            int width = currentPattern.GetUpperBound(1);
             for (int j = 0; j <= height; j++)
             {
                 for (int k = 0; k <= width; k++)
                 {
-                    if (currentPattern.PatternShape[j, k])
+                    if (currentPattern[j, k])
                     {
                         int curNumber = j * Statics.PATTERN_SIZE + k;
                         Ellipse ellipse = FindName($"p{i}{curNumber}") as Ellipse;
@@ -82,7 +72,7 @@ public partial class MainWindow : Window
 
                         TextBlock text = FindName($"s{i}") as TextBlock;
 
-                        text.Text = currentPattern.Score.ToString();
+                        text.Text = Statics.PATTERNS[i].Score.ToString();
 
                     }
                 }

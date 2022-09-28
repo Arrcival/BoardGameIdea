@@ -16,7 +16,7 @@ public static class Statics
     const int PLAYER_HITS = GRID_WIDTH * GRID_WIDTH - GRID_WIDTH;
     const bool PATTERNS_OVERLAP = true;
     
-    public static Pattern[] PATTERNS = new Pattern[12]{
+    public static Entities.Pattern[] PATTERNS = new Entities.Pattern[12]{
         new("101,000,101", 2, 1), // The square 
         new("1001,0000,0000,1001", 2, 1), // The big square 
         new("10001,00000,00000,00000,10001", 2, 1), // The really big square 

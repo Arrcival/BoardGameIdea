@@ -1,4 +1,4 @@
-﻿using BoardGameIdea.Entities;
+﻿using BoardGameIdea.Entities.One;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +28,7 @@ public class PatternTransformationTest
     [Test]
     public void TestPatternConversion()
     {
-        Pattern pattern = new Pattern("100,011", 1, 2);
+        Pattern pattern = new PatternOne("100,011", 1, 2);
         Assert.That(pattern.PatternTrueShapes[0][0].Item1, Is.EqualTo(0));
         Assert.That(pattern.PatternTrueShapes[0][0].Item2, Is.EqualTo(0));
         Assert.That(pattern.PatternTrueShapes[0][1].Item1, Is.EqualTo(1));

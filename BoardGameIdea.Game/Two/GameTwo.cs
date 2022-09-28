@@ -1,8 +1,9 @@
-﻿using static BoardGameIdea.Entities.Helper;
+﻿using BoardGameIdea.Entities.One;
+using static BoardGameIdea.Entities.Helper;
 
 namespace BoardGameIdea.Entities.Two;
 
-public class GameBis
+public class GameTwo
 {
     List<(int, int)> whitePlayerHits;
     List<(int, int)> blackPlayerHits;
@@ -10,15 +11,15 @@ public class GameBis
     int playerHits;
     bool patternOverlapScore;
     TileType currentPlayerMove;
-    Pattern[] patterns;
+    PatternTwo[] patterns;
     int patternsMinimumCount;
     int width;
 
     public int WhiteScore { get { return GetScore(whitePlayerHits); } }
     public int BlackScore { get { return GetScore(blackPlayerHits); } }
 
-    public GameBis(int width) : this(width, width * width - width) { }
-    public GameBis(int width, int playerHits, bool overlapPatterns = false)
+    public GameTwo(int width) : this(width, width * width - width) { }
+    public GameTwo(int width, int playerHits, bool overlapPatterns = false)
     {
         whitePlayerHits = new();
         blackPlayerHits = new();
@@ -29,7 +30,11 @@ public class GameBis
     }
     public void SetupPatterns(params Pattern[] playerPatterns)
     {
-        patterns = playerPatterns;
+        patterns = new PatternTwo[playerPatterns.Length];
+        for (int i = 0; i < playerPatterns.Length; i++)
+        {
+            patterns[i] = new PatternTwo(playerPatterns[i]);
+        }
         patternsMinimumCount = patterns.Select(p => p.TilesAmount).Min();
     }
 
@@ -56,7 +61,7 @@ public class GameBis
     #region Scoring & Patterns
     int GetScore(List<(int, int)> playerHits)
     {
-         return HelperBis.GetBoardPoints(playerHits, patterns, width, patternsMinimumCount);
+         return HelperTwo.GetBoardPoints(playerHits, patterns, width, patternsMinimumCount);
     }
 
     public void SetupFromString(string str)

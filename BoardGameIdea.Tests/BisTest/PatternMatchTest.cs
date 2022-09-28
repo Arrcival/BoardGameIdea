@@ -1,4 +1,4 @@
-using BoardGameIdea.Entities;
+using BoardGameIdea.Entities.One;
 using static BoardGameIdea.Entities.Bis.HelperBis;
 
 namespace BoardGameIdea.Tests.BisTest;
@@ -13,7 +13,7 @@ public class PatternMatchBisTest
             (0, 1),
             (0, 2)
         };
-        Pattern pattern = new Pattern("11", 1, 1);
+        Pattern pattern = new PatternOne("11", 1, 1);
         Assert.IsTrue(CanPatternWork(playerHits, pattern.PatternTrueShapes[0], 0, 1));
     }
 
@@ -25,7 +25,7 @@ public class PatternMatchBisTest
             (0, 1),
             (1, 2)
         };
-        Pattern pattern = new Pattern("10,01", 1, 1);
+        Pattern pattern = new PatternOne("10,01", 1, 1);
         Assert.IsTrue(CanPatternWork(playerHits, pattern.PatternTrueShapes[0], 0, 1));
     }
     [Test]
@@ -37,7 +37,7 @@ public class PatternMatchBisTest
             (1, 1),
             (3, 1),
         };
-        Pattern pattern = new Pattern("01,10,00,10", 1, 1);
+        Pattern pattern = new PatternOne("01,10,00,10", 1, 1);
         Assert.IsTrue(CanPatternWork(playerHits, pattern.PatternTrueShapes[0], 0, 1));
     }
 }

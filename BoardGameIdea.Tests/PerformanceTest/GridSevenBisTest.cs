@@ -1,5 +1,5 @@
-﻿using BoardGameIdea.Entities;
-using BoardGameIdea.Entities.Bis;
+﻿using BoardGameIdea.Entities.Bis;
+using BoardGameIdea.Entities.One;
 
 namespace BoardGameIdea.Tests.PerformanceTest;
 

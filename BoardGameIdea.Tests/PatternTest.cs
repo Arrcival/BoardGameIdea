@@ -1,4 +1,4 @@
-﻿using BoardGameIdea.Entities;
+﻿using BoardGameIdea.Entities.One;
 
 namespace BoardGameIdea.Tests;
 

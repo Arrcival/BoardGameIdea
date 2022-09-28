@@ -56,7 +56,7 @@ public static class HelperOne
     }
 
 
-    public static int GetBoardPointsOld(TileType[,] currentBoard, Pattern[] patterns, TileType player, int minimumTiles = 1)
+    public static int GetBoardPointsOld(TileType[,] currentBoard, PatternOne[] patterns, TileType player, int minimumTiles = 1)
     {
         int playerHits = currentBoard.PlayerHits(player);
         if (playerHits < minimumTiles) return 0;
@@ -87,7 +87,7 @@ public static class HelperOne
         }
         return finalScore;
     }
-    public static int GetBoardPoints(TileType[,] currentBoard, Pattern[] patterns, TileType player, int minimumTiles = 1)
+    public static int GetBoardPoints(TileType[,] currentBoard, PatternOne[] patterns, TileType player, int minimumTiles = 1)
     {
         int playerHits = currentBoard.PlayerHits(player);
         if (playerHits < minimumTiles) return 0;
@@ -101,7 +101,7 @@ public static class HelperOne
             {
                 for (int i = 0; i < patterns.Length; i++)
                 {
-                    Pattern currentPattern = patterns[i];
+                    PatternOne currentPattern = patterns[i];
                     bool[][,] patternsArray = currentPattern.PatternShapes;
                     (int, int)[][] patternsTrueShapes = currentPattern.PatternTrueShapes;
                     int patternsCount = patternsArray.GetUpperBound(0);
@@ -121,7 +121,7 @@ public static class HelperOne
         return finalScore;
     }
 
-    public static int GetBoardPointsOverlap(TileType[,] currentBoard, Pattern[] patterns, TileType player)
+    public static int GetBoardPointsOverlap(TileType[,] currentBoard, PatternOne[] patterns, TileType player)
     {
         int score = 0;
         for (int x = 0; x <= currentBoard.GetUpperBound(0); x++)

@@ -1,4 +1,5 @@
 ﻿using BoardGameIdea.Entities.Interfaces;
+using System.Linq;
 using static BoardGameIdea.Entities.Helper;
 using static BoardGameIdea.Entities.One.HelperOne;
 
@@ -10,7 +11,7 @@ public class GameOne : IGame
     int playerHits;
     bool patternOverlapScore;
     TileType currentPlayerMove;
-    Pattern[] patterns;
+    PatternOne[] patterns;
     int patternsMinimumCount;
     int width;
 
@@ -26,7 +27,11 @@ public class GameOne : IGame
 
     public void SetupPatterns(params Pattern[] playerPatterns)
     {
-        patterns = playerPatterns;
+        patterns = new PatternOne[playerPatterns.Length];
+        for(int i = 0; i < playerPatterns.Length; i++)
+        {
+            patterns[i] = new PatternOne(playerPatterns[i]);
+        }
         patternsMinimumCount = patterns.Select(p => p.TilesAmount).Min();
     }
 

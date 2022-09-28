@@ -1,4 +1,4 @@
-using BoardGameIdea.Entities;
+using BoardGameIdea.Entities.One;
 using static BoardGameIdea.Entities.Bis.HelperBis;
 
 namespace BoardGameIdea.Tests.BisTest;
@@ -18,7 +18,7 @@ public class PatternRemovalBisTest
             (1, 0),
             (1, 2)
         };
-        Pattern pattern = new Pattern("1", 1, 1);
+        Pattern pattern = new PatternOne("1", 1, 1);
         List<(int, int)> newPlayerHits = RemovePattern(playerHits, pattern.PatternTrueShapes[0], 0, 1);
         Assert.That(expectedPlayerHits, Is.EqualTo(newPlayerHits));
         Assert.IsFalse(playerHits == newPlayerHits);
@@ -36,7 +36,7 @@ public class PatternRemovalBisTest
             (1, 0),
             (1, 2)
         };
-        Pattern pattern = new Pattern("11", 1, 1);
+        Pattern pattern = new PatternOne("11", 1, 1);
         List<(int, int)> newPlayerHits = RemovePattern(playerHits, pattern.PatternTrueShapes[0], 0, 1);
         Assert.That(expectedPlayerHits, Is.EqualTo(newPlayerHits));
         Assert.IsFalse(playerHits == newPlayerHits);
@@ -50,7 +50,7 @@ public class PatternRemovalBisTest
             (0, 2)
         };
         List<(int, int)> expectedPlayerHits = new();
-        Pattern pattern = new Pattern("11", 1, 1);
+        Pattern pattern = new PatternOne("11", 1, 1);
         List<(int, int)> newPlayerHits = RemovePattern(playerHits, pattern.PatternTrueShapes[0], 0, 1);
         Assert.That(expectedPlayerHits, Is.EqualTo(newPlayerHits));
         Assert.That(newPlayerHits, !Is.EqualTo(playerHits));
@@ -70,7 +70,7 @@ public class PatternRemovalBisTest
             (2, 3)
         };
         List<(int, int)> expectedPlayerHits = new();
-        Pattern pattern = new Pattern("0110,1010,0011", 1, 1);
+        Pattern pattern = new PatternOne("0110,1010,0011", 1, 1);
         List<(int, int)> newPlayerHits = RemovePattern(playerHits, pattern.PatternTrueShapes[0], 0, 0);
         Assert.That(expectedPlayerHits, Is.EqualTo(newPlayerHits));
         Assert.That(newPlayerHits, !Is.EqualTo(playerHits));
