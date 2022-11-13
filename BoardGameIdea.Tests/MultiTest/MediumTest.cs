@@ -70,6 +70,12 @@ public class MediumTest
         foreach (IGame game in games)
         {
             game.SetupFromString(".ww..,wwbb.,.bb..,ww...,.bb..");
+            /* .ww..
+             * wwbb.
+             * .bb..
+             * ww...
+             * .bb..
+             */
 
             Assert.IsFalse(game.IsGameOver());
             Assert.That(game.WhiteScore, Is.EqualTo(6));
