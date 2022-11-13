@@ -50,7 +50,7 @@ public class GridSevenTest
     [Test, MaxTime(600)]
     public void TestPerformanceThree()
     {
-        gameTwo.SetupFromString("wbwbwbw,bwbwbwb,wbwbwbw,.......,wbwbwbw,.......,.......");
+        gameThree.SetupFromString("wbwbwbw,bwbwbwb,wbwbwbw,.......,wbwbwbw,.......,.......");
         Assert.That(gameThree.GetScore(Helper.TileType.WHITE), Is.EqualTo(14));
     }
 }

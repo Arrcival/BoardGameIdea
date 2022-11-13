@@ -72,27 +72,29 @@ public static class HelperThree
             }
         }
 
-        var everyPossiblities = Helper.GetAllCombos(patternsWorking);
-        int maximumPoints = patternsWorking.Sum(p => p.Score);
-        for(int j = maximumPoints; j > 0; j--)
+        if(patternsWorking.Count > 0)
         {
-            var currentPossibilities = everyPossiblities.Where(_ => _.Sum(p => p.Score) == j).ToList();
-            for (int k = 0; k < currentPossibilities.Count(); k++)
+            var everyPossiblities = Helper.GetAllCombos(patternsWorking);
+            int maximumPoints = patternsWorking.Sum(p => p.Score);
+            for (int j = maximumPoints; j > 0; j--)
             {
-                bool pass = false;
-                var current = currentPossibilities[k];
-                for (int l = 0; l < current.Count - 1; l++)
+                var currentPossibilities = everyPossiblities.Where(_ => _.Sum(p => p.Score) == j).ToList();
+                for (int k = 0; k < currentPossibilities.Count(); k++)
                 {
-                    if (current[l].Coordinates.Intersect(current[l + 1].Coordinates).Count() > 0)
+                    bool pass = false;
+                    var current = currentPossibilities[k];
+                    for (int l = 0; l < current.Count - 1; l++)
                     {
-                        pass = true;
-                        break;
+                        if (current[l].Coordinates.Intersect(current[l + 1].Coordinates).Count() > 0)
+                        {
+                            pass = true;
+                            break;
+                        }
                     }
+                    if (!pass) return j;
                 }
-                if (!pass) return j;
             }
         }
-
         return 0;
     }
 }
