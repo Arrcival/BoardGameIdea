@@ -58,7 +58,7 @@ public static class HelperThree
                     int patternsCount = patternsTrueShapes.GetUpperBound(0);
                     for (int j = 0; j <= patternsCount; j++)
                     {
-                        if (playerHits.Count >= currentPattern.TilesAmount)
+                        if (playerHits.Count < currentPattern.TilesAmount)
                         {
                             break;
                         }
@@ -71,6 +71,7 @@ public static class HelperThree
                 }
             }
         }
+
         var everyPossiblities = Helper.GetAllCombos(patternsWorking);
         int maximumPoints = patternsWorking.Sum(p => p.Score);
         for(int j = maximumPoints; j > 0; j--)
@@ -78,17 +79,17 @@ public static class HelperThree
             var currentPossibilities = everyPossiblities.Where(_ => _.Sum(p => p.Score) == j).ToList();
             for (int k = 0; k < currentPossibilities.Count(); k++)
             {
+                bool pass = false;
                 var current = currentPossibilities[k];
                 for (int l = 0; l < current.Count - 1; l++)
                 {
-                    for (int m = l + 1; m < current.Count; m++)
+                    if (current[l].Coordinates.Intersect(current[l + 1].Coordinates).Count() > 0)
                     {
-                        if (current[l].Coordinates.Intersect(current[m].Coordinates).Count() == 0)
-                        {
-                            return j;
-                        }
+                        pass = true;
+                        break;
                     }
                 }
+                if (!pass) return j;
             }
         }
 

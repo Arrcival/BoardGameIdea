@@ -13,11 +13,10 @@ public class PatternInflated
 
     public PatternInflated((int, int)[] coordinates, int x, int y, int score)
     {
-        Coordinates = coordinates;
+        Coordinates = new (int, int)[coordinates.Length];
         for(int i = 0; i < coordinates.Length; i++)
         {
-            Coordinates[i].Item1 += x;
-            Coordinates[i].Item2 += y;
+            Coordinates[i] = new(coordinates[i].Item1 + x, coordinates[i].Item2 += y);
         }
         Score = score;
     }
