@@ -85,13 +85,18 @@ public static class HelperThree
                     var current = currentPossibilities[k];
                     for (int l = 0; l < current.Count - 1; l++)
                     {
-                        if (current[l].Coordinates.Intersect(current[l + 1].Coordinates).Count() > 0)
+                        for(int m = l; m < current.Count; m++)
                         {
-                            pass = true;
-                            break;
+                            if (current[l].Coordinates.Intersect(current[m].Coordinates).Count() > 0)
+                            {
+                                pass = true;
+                                break;
+                            }
                         }
+                        if (pass) break;
                     }
-                    if (!pass) return j;
+                    if (!pass) 
+                        return j;
                 }
             }
         }

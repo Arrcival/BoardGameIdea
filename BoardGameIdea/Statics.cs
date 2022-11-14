@@ -14,7 +14,7 @@ public static class Statics
     public const int PATTERN_CIRCLE_SIZE = 20;
 
     const int PLAYER_HITS = GRID_WIDTH * GRID_WIDTH - GRID_WIDTH;
-    const bool PATTERNS_OVERLAP = true;
+    const bool PATTERNS_OVERLAP = false;
     
     public static Entities.Pattern[] PATTERNS = new Entities.Pattern[12]{
         new("101,000,101", 2, 1), // The square 
