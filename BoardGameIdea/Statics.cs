@@ -34,8 +34,8 @@ public static class Statics
 
     public static void InitializeGame()
     {
-        Game = new Game(GRID_WIDTH, PLAYER_HITS, PATTERNS_OVERLAP);
-        Game.SetupPatterns(PATTERNS);
+        Statics.Game = new Game(GRID_WIDTH, PLAYER_HITS, PATTERNS_OVERLAP);
+        Statics.Game.SetupPatterns(PATTERNS);
     }
 
     public static SolidColorBrush GetBrushFromPlayer(this TileType player)
