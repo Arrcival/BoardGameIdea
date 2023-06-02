@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BoardGameIdea.Tests.HelperTest;
 
-public class PatternOneTransformationTest
+public class PatternTransformationTest
 {
     [Test]
     public void TestBoolToIntConversion()

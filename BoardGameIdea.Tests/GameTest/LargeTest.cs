@@ -1,7 +1,7 @@
 using BoardGameIdea.Entities;
 using BoardGameIdea.Entities.Interfaces;
 
-namespace BoardGameIdea.Tests.MultiTest;
+namespace BoardGameIdea.Tests;
 
 public class LargeTest
 {

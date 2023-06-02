@@ -4,7 +4,7 @@ using static BoardGameIdea.Entities.HelperConst.TileType;
 
 namespace BoardGameIdea.Tests.HelperTest;
 
-public class PatternOneMatchTest
+public class PatternMatchTest
 {
     [Test]
     public void TestPatternMatchOne()
