@@ -1,12 +1,11 @@
 ﻿using BoardGameIdea.Entities;
-using BoardGameIdea.Entities.One;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BoardGameIdea.Tests.OneTest.HelperTest;
+namespace BoardGameIdea.Tests.HelperTest;
 
 public class PatternOneTransformationTest
 {
@@ -29,8 +28,8 @@ public class PatternOneTransformationTest
     [Test]
     public void TestPatternConversion()
     {
-        Pattern patternStruct = new("100,011", 1, 2);
-        PatternOne pattern = new PatternOne(patternStruct);
+        PatternBase patternStruct = new("100,011", 1, 2);
+        Pattern pattern = new Pattern(patternStruct);
         Assert.That(pattern.PatternTrueShapes[0][0].Item1, Is.EqualTo(0));
         Assert.That(pattern.PatternTrueShapes[0][0].Item2, Is.EqualTo(0));
         Assert.That(pattern.PatternTrueShapes[0][1].Item1, Is.EqualTo(1));

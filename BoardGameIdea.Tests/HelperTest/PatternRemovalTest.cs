@@ -1,9 +1,8 @@
 using BoardGameIdea.Entities;
-using BoardGameIdea.Entities.One;
-using static BoardGameIdea.Entities.Helper;
-using static BoardGameIdea.Entities.Helper.TileType;
+using static BoardGameIdea.Entities.HelperConst;
+using static BoardGameIdea.Entities.HelperConst.TileType;
 
-namespace BoardGameIdea.Tests.OneTest.HelperTest;
+namespace BoardGameIdea.Tests.HelperTest;
 
 public class PatternRemovalTest
 {
@@ -24,7 +23,7 @@ public class PatternRemovalTest
             { EMPTY, EMPTY, BLACK },
             { WHITE, EMPTY, WHITE }
         };
-        Assert.That(expectedReturnBoard, Is.EqualTo(HelperOne.RemovePattern(board, pattern, 0, 1)));
+        Assert.That(expectedReturnBoard, Is.EqualTo(Helper.RemovePattern(board, pattern, 0, 1)));
         Assert.That(expectedReturnBoard, !Is.EqualTo(board));
     }
     [Test]
@@ -44,7 +43,7 @@ public class PatternRemovalTest
             { EMPTY, EMPTY, EMPTY },
             { WHITE, EMPTY, WHITE }
         };
-        Assert.That(expectedReturnBoard, Is.EqualTo(HelperOne.RemovePattern(board, pattern, 0, 1)));
+        Assert.That(expectedReturnBoard, Is.EqualTo(Helper.RemovePattern(board, pattern, 0, 1)));
         Assert.That(expectedReturnBoard, !Is.EqualTo(board));
     }
     [Test]
@@ -65,7 +64,7 @@ public class PatternRemovalTest
             { EMPTY, EMPTY, BLACK },
             { WHITE, EMPTY, EMPTY }
         };
-        Assert.That(expectedReturnBoard, Is.EqualTo(HelperOne.RemovePattern(board, pattern, 0, 1)));
+        Assert.That(expectedReturnBoard, Is.EqualTo(Helper.RemovePattern(board, pattern, 0, 1)));
         Assert.That(expectedReturnBoard, !Is.EqualTo(board));
     }
 

@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace BoardGameIdea.Tests;
 
-public class HelperTest
+public class HelperConstTest
 {
     [Test]
     public void TestAllCombosInt()
     {
         var entry = new List<int>() { 1, 2, 3 };
-        var result = Helper.GetAllCombos(entry);
+        var result = HelperConst.GetAllCombos(entry);
 
         Assert.That(result, Has.Count.EqualTo(7));
         Assert.That(result, Does.Contain(new List<int>() { 1 }));
@@ -30,7 +30,7 @@ public class HelperTest
         var entry = new List<string>();
         for (int i = 0; i < 4; i++)
             entry.Add("word");
-        var result = Helper.GetAllCombos(entry);
+        var result = HelperConst.GetAllCombos(entry);
 
         Assert.That(result, Has.Count.EqualTo(15));
     }
@@ -41,7 +41,7 @@ public class HelperTest
         var entry = new List<string>();
         for (int i = 0; i < 5; i++)
             entry.Add("word");
-        var result = Helper.GetAllCombos(entry);
+        var result = HelperConst.GetAllCombos(entry);
 
         Assert.That(result, Has.Count.EqualTo(31));
     }

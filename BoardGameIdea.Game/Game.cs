@@ -1,22 +1,22 @@
 ﻿using BoardGameIdea.Entities.Interfaces;
 using System.Linq;
+using static BoardGameIdea.Entities.HelperConst;
 using static BoardGameIdea.Entities.Helper;
-using static BoardGameIdea.Entities.One.HelperOne;
 
-namespace BoardGameIdea.Entities.One;
+namespace BoardGameIdea.Entities;
 
-public class GameOne : IGame
+public class Game : IGame
 {
     public TileType[,] Board;
     int playerHits;
     bool patternOverlapScore;
     TileType currentPlayerMove;
-    PatternOne[] patterns;
+    Pattern[] patterns;
     int patternsMinimumCount;
     int width;
 
-    public GameOne(int width) : this(width, width * width - width) { }
-    public GameOne(int width, int playerHits, bool overlapPatterns = false)
+    public Game(int width) : this(width, width * width - width) { }
+    public Game(int width, int playerHits, bool overlapPatterns = false)
     {
         Board = new TileType[width, width];
         this.playerHits = playerHits;
@@ -25,12 +25,12 @@ public class GameOne : IGame
         this.width = width;
     }
 
-    public void SetupPatterns(params Pattern[] playerPatterns)
+    public void SetupPatterns(params PatternBase[] playerPatterns)
     {
-        patterns = new PatternOne[playerPatterns.Length];
-        for(int i = 0; i < playerPatterns.Length; i++)
+        patterns = new Pattern[playerPatterns.Length];
+        for (int i = 0; i < playerPatterns.Length; i++)
         {
-            patterns[i] = new PatternOne(playerPatterns[i]);
+            patterns[i] = new Pattern(playerPatterns[i]);
         }
         patternsMinimumCount = patterns.Select(p => p.TilesAmount).Min();
     }
@@ -68,7 +68,7 @@ public class GameOne : IGame
         int height = Board.GetUpperBound(0) + 1;
         int width = Board.GetUpperBound(1) + 1;
         int count = 0;
-        for(int i = 0; i < height; i++)
+        for (int i = 0; i < height; i++)
         {
             for (int j = 0; j < width; j++)
             {
@@ -80,7 +80,7 @@ public class GameOne : IGame
                 count++;
                 if (count >= str.Length) return;
             }
-        }            
+        }
     }
 
     public TileType[,] GetBoard()

@@ -1,9 +1,8 @@
-﻿using BoardGameIdea.Entities.One;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using static BoardGameIdea.Entities.Helper;
+using static BoardGameIdea.Entities.HelperConst;
 
 namespace BoardGameIdea;
 

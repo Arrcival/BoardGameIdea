@@ -1,16 +1,15 @@
 using BoardGameIdea.Entities;
 using BoardGameIdea.Entities.Interfaces;
-using BoardGameIdea.Entities.One;
 
 namespace BoardGameIdea.Tests.MultiTest;
 
 public class LargeTest
 {
-    List<IGame> games;
+    IGame game;
     [SetUp]
     public void Setup()
     {
-        Pattern[] patterns = new Pattern[12]
+        PatternBase[] patterns = new PatternBase[12]
         {
             new("101,000,101", 2, 1), // The square 
             new("1001,0000,0000,1001", 2, 1), // The big square 
@@ -25,19 +24,16 @@ public class LargeTest
             new("101,110,101", 2, 4), // The K
             new("011000,100000,000000,000000,000001,000110", 4, 2) // The mirror
         };
-        games = TestHelper.SetupGames(7, 21, false, patterns);
+        game = TestHelper.SetupGame(7, 21, false, patterns);
     }
 
     [Test]
     public void TestLargeSeven()
     {
-        foreach (IGame game in games)
-        {
-            game.SetupFromString("..wwbb.,.bwwbw.,.wbbbw.,.bbwwb.,..wbwb.,.wbwbb.,..wwbw.");
+        game.SetupFromString("..wwbb.,.bwwbw.,.wbbbw.,.bbwwb.,..wbwb.,.wbwbb.,..wwbw.");
 
-            Assert.IsFalse(game.IsGameOver());
-            Assert.That(game.WhiteScore, Is.EqualTo(5));
-            Assert.That(game.BlackScore, Is.EqualTo(3));
-        }
+        Assert.IsFalse(game.IsGameOver());
+        Assert.That(game.WhiteScore, Is.EqualTo(5));
+        Assert.That(game.BlackScore, Is.EqualTo(3));
     }
 }

@@ -1,8 +1,8 @@
-using BoardGameIdea.Entities.One;
-using static BoardGameIdea.Entities.Helper;
-using static BoardGameIdea.Entities.Helper.TileType;
+using BoardGameIdea.Entities;
+using static BoardGameIdea.Entities.HelperConst;
+using static BoardGameIdea.Entities.HelperConst.TileType;
 
-namespace BoardGameIdea.Tests.OneTest.HelperTest;
+namespace BoardGameIdea.Tests.HelperTest;
 
 public class PatternOneNoMatchTest
 {
@@ -18,7 +18,7 @@ public class PatternOneNoMatchTest
         {
             { true, true }
         };
-        Assert.IsFalse(HelperOne.CanPatternWork(board, pattern, 0, 1, WHITE));
+        Assert.IsFalse(Helper.CanPatternWork(board, pattern, 0, 1, WHITE));
     }
 
     [Test]
@@ -33,7 +33,7 @@ public class PatternOneNoMatchTest
         {
             { true, true }
         };
-        Assert.IsFalse(HelperOne.CanPatternWork(board, pattern, 0, 2, WHITE));
+        Assert.IsFalse(Helper.CanPatternWork(board, pattern, 0, 2, WHITE));
     }
     [Test]
     public void TestPatternOOB2()
@@ -47,7 +47,7 @@ public class PatternOneNoMatchTest
         {
             { true, true }
         };
-        Assert.IsFalse(HelperOne.CanPatternWork(board, pattern, 0, 3, WHITE));
+        Assert.IsFalse(Helper.CanPatternWork(board, pattern, 0, 3, WHITE));
     }
     [Test]
     public void TestPatternOOB3()
@@ -61,6 +61,6 @@ public class PatternOneNoMatchTest
         {
             { true, true }
         };
-        Assert.IsFalse(HelperOne.CanPatternWork(board, pattern, -1, 0, WHITE));
+        Assert.IsFalse(Helper.CanPatternWork(board, pattern, -1, 0, WHITE));
     }
 }

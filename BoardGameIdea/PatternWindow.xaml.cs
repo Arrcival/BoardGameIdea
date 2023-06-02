@@ -12,13 +12,13 @@ namespace BoardGameIdea;
 /// </summary>
 public partial class PatternWindow : Window
 {
-    public PatternWindow(Pattern[] patterns)
+    public PatternWindow(PatternBase[] patterns)
     {
         InitializeComponent();
         SetupPatterns(patterns);
     }
 
-    public void SetupPatterns(Pattern[] patterns)
+    public void SetupPatterns(PatternBase[] patterns)
     {
         Grid mainGrid = FindName("MainPatternGrid") as Grid;
         for(int i = 0; i < Math.Min(patterns.Length, 15); i++)
@@ -36,7 +36,7 @@ public partial class PatternWindow : Window
         }
     }
 
-    public Grid GenerateGridForPattern(Pattern pattern)
+    public Grid GenerateGridForPattern(PatternBase pattern)
     {
         Grid grid = new Grid();
         #region Setup grid definitions
